@@ -12,5 +12,11 @@
     "exclude": [
         "node_modules",
         "**/node_modules/*"
-    ]
+    ],
+    "importCSSModule": {
+        "prefix": "csm",
+        "scope": "javascript,typescript,javascriptreact",
+        "body": ["import styles from './${TM_FILENAME_BASE}.module.css'"],
+        "description": "Import CSS Module as `styles`"
+    },
 }
