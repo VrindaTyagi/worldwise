@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./CityList.module.css";
 import Spinner from "./Spinner";
 import CityItem from "./CityItem";
@@ -11,6 +10,7 @@ function CityList({ cities, isLoading }) {
     return (
       <Message message="Add you first city by clicking on a city on the map" />
     );
+    
   return (
     <ul className={styles.cityList}>
       {cities.map((city) => (
