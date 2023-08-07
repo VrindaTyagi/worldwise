@@ -15,10 +15,10 @@ function CitiesProvider({ children }) {
       try {
         setIsLoading(true);
         const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
+        let data = await res.json();
         setCities(data);
-      } catch {
-        alert("There was an error fetching cities");
+      } catch (error) {
+        alert(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -39,8 +39,30 @@ function CitiesProvider({ children }) {
     }
   }
 
+  async function createCity(newCity) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCity),
+      });
+      const data = await res.json();
+      // @ts-ignore
+      setCities((cities) => [...cities, data]);
+    } catch {
+      alert("There was an error fetching cities");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
+    <CitiesContext.Provider
+      value={{ cities, isLoading, currentCity, getCity, createCity }}
+    >
       {children}
     </CitiesContext.Provider>
   );
